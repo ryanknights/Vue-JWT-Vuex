@@ -47,23 +47,9 @@ export default {
   	]),
   	register (user) {
   		Auth.register(user)
-  			.then((data) => 
-  			{
-  				return Auth.login({username: user.username, password: user.password});
-  			})
-  			.then((data) =>
-  			{
-  				this.login(data)	
-  					.then(() =>
-  					{
-  						return this.$router.push({path: '/'});
-  					});
-  				
-  			})
-  			.catch((error) =>
-  			{
-  				this.setError(error.data);
-  			});
+  			.then((data) => this.login({username: user.username, password: user.password}))
+        .then(() => this.$router.push({path: '/'}))    
+  			.catch((error) => this.setError(error.data));
   	}
   }
 }

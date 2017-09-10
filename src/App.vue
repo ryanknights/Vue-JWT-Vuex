@@ -2,6 +2,7 @@
   <div id="app">
     <site-navigation></site-navigation>
     <div class="container">
+      <loading></loading>
       <feedback></feedback>
       <router-view></router-view>
     </div>    
@@ -11,16 +12,23 @@
 <script>
 
 import SiteNavigation from './components/SiteNavigation';
+import Auth from './services/Auth';
 import Feedback from './components/Feedback';
+import Loading from './components/Loading';
+import store from './store/store';
+import { mapActions } from 'vuex';
 
 export default {
   name: 'app',
   components: {
     SiteNavigation,
-    Feedback
+    Feedback,
+    Loading
   },
-  created () {
-    console.log('Check for token');
+  methods: {
+    ...mapActions([
+
+    ])
   }
 }
 </script>
