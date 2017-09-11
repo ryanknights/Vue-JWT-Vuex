@@ -70,19 +70,17 @@ const actions = {
 			commit('setRefreshToken', data.token.refresh);
 		});
 	},
-	authenticate({ state, commit }, accessToken) {
-		return Auth.authenticate(accessToken).then((data) => {
+	authenticate({ state, commit }) {
+		return Auth.authenticate().then((data) => {
 			commit('setLoggedIn', true);
 			commit('setUser', data.user);
-			commit('setAccessToken', accessToken);
-			commit('setRefreshToken', localStorage.getItem('refreshToken'));
 		});
 	},
 	logout({ commit }) {
 		commit('setLoggedIn', false);
 		commit('setUser', false);
-		commit('setAccessToken', false);
-		commit('setRefreshToken', false);		
+		commit('clearAccessToken', false);
+		commit('clearRefreshToken', false);		
 	},
 	setLoading({ commit }, status) {
 		commit('setLoading', status);

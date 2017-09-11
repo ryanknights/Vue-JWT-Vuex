@@ -6,24 +6,28 @@ export default (to, from, next) => {
 		return next();
 	}
 
+	const accessToken = localStorage.getItem('accessToken');
+	const refreshToken = localStorage.getItem('refreshToken');
+
+	if (!accessToken) {
+		store.dispatch('setAppLoading', false);
+		return next();
+	}
+
+	store.commit('setAccessToken', accessToken);
+	store.commit('setRefreshToken', refreshToken)
+
 	store.dispatch('setLoading', true);
-
-	setTimeout(() => {
-	  const token = localStorage.getItem('accessToken');
-
-	  if (token) {
-	  	store.dispatch('authenticate', token)
-	  		.then(() => {
-					store.dispatch('setAppLoading', false);
-					store.dispatch('setLoading', false);
-					next();
-	  		})
-	  		.catch((error) => {
-					store.dispatch('setAppLoading', false);
-					store.dispatch('setLoading', false);
-					store.dispatch('logout');
-					next('/login');
-	  		})
-	  }
-	}, 2000);
+	store.dispatch('authenticate')
+  		.then(() => {
+				store.dispatch('setAppLoading', false);
+				store.dispatch('setLoading', false);
+				next();
+  		})
+  		.catch((error) => {
+				store.dispatch('setAppLoading', false);
+				store.dispatch('setLoading', false);
+				store.dispatch('logout');
+				next('/login');
+  		})
 }

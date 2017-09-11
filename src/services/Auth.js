@@ -12,9 +12,14 @@ export default {
 			.then(response => response.data)
 			.catch(error => Promise.reject(error.response));
 	},
-	authenticate (token) {
-		return axios.get(`https://expressapi.ryanknights.co.uk/api/authenticate`, {headers: {'Authorization': `Bearer ${token}`}})
+	authenticate () {
+		return axios.get(`https://expressapi.ryanknights.co.uk/api/authenticate`)
 			.then(response => response.data)
 			.catch(error => Promise.reject(error.response));
+	},
+	refresh (token) {
+		return axios.post('https://expressapi.ryanknights.co.uk/api/authenticate/refreshToken', { token: token })
+		  .then(response => response.data)
+		  .catch(error => Promise.reject(error.response));
 	}
 }
