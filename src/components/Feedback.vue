@@ -1,16 +1,10 @@
 <template>
   <div class="feedback">
-  	<div class="alert alert-success" v-if="feedback.success">
-			 <button type="button" class="close" aria-label="Close" @click="clearSuccess">
+  	<div :class="feedbackClass" v-if="feedback.message">
+			 <button type="button" class="close" aria-label="Close" @click="clearFeedback">
 			    <span aria-hidden="true">&times;</span>
 			  </button>  		
-  			{{ feedback.success }}
-  	</div>
-  	<div class="alert alert-warning" v-if="feedback.error">
-			<button type="button" class="close" aria-label="Close" @click="clearError">
-				<span aria-hidden="true">&times;</span>
-			</button>   		
-  		{{ feedback.error }}
+  			{{ feedback.message }}
   	</div>
   </div>
 </template>
@@ -23,14 +17,19 @@ export default {
   name: 'feedback',
   computed: {
     ...mapGetters([
-    	'feedback'
+    	'feedback',
+      'feedbackClass'
     ])
   },
   methods: {
   	...mapActions([
-  		'clearError',
-  		'clearSuccess'
+  		'clearFeedback'
   	])
+  },
+  watch: {
+    $route () {
+      this.clearFeedback();
+    }
   }
 }
 </script>

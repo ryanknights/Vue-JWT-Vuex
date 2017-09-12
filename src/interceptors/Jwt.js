@@ -5,20 +5,24 @@ import Auth from '../services/Auth';
 const onSuccess = (response) => response;
 
 const onError = (error) => {
-  const originalRequest = error.config;
 
-  if (error.response.status === 401 && !originalRequest._retry) {
-
-    originalRequest._retry = true;
-
-    const refreshToken = store.getters.refreshtoken;
-    return Auth.refresh(refreshToken).then((response) => {
-        store.commit('setAccessToken', response.token.access);
-        return axios(originalRequest);
-      }).catch((error) => {
-        store.dispatch('logout');
-        return Promise.reject(error);
-      })
+  switch (error.response.status) {
+    case 401:
+      const originalRequest = error.config;
+      if (!originalRequest._retry && error.response.data === 'Token Expired') {
+        originalRequest._retry = true;
+        const refreshToken = store.getters.refreshtoken;
+        return Auth.refresh(refreshToken).then((response) => {
+            store.commit('setAccessToken', response.token.access);
+            return axios(originalRequest);
+          }).catch((error) => {
+            store.dispatch('logout');
+            return Promise.reject(error);
+          });
+      } 
+    break;
+    default:
+    break;
   }
 
   return Promise.reject(error); 

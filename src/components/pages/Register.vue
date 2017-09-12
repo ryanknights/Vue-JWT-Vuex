@@ -41,15 +41,14 @@ export default {
   },
   methods: {
   	...mapActions([
-  		'setError',
-  		'setSuccess',
+  		'setFeedback',
   		'login'
   	]),
   	register (user) {
   		Auth.register(user)
   			.then((data) => this.login({username: user.username, password: user.password}))
         .then(() => this.$router.push({path: '/'}))    
-  			.catch((error) => this.setError(error.data));
+  			.catch((error) => this.setFeedback({message: error.data, type: 'warning'}))
   	}
   }
 }

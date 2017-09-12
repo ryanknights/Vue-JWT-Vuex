@@ -2,6 +2,7 @@ import store from '../../store/store';
 import Auth from '../../services/Auth';
 
 export default (to, from, next) => {
+	
 	if (!store.state.appLoading) {
 		return next();
 	}

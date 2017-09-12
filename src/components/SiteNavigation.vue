@@ -8,6 +8,9 @@
 		  <li class="nav-item">
 		    <router-link to="/posts" class="nav-link">Posts</router-link>
 		  </li>
+      <li class="nav-item" v-if="isAdmin">
+        <router-link to="/admin" class="nav-link">Admin</router-link>
+      </li>      
 		</ul> 
 		<ul class="nav nav-bar float-left" v-if="!loggedin">
 		  <li class="nav-item">
@@ -40,17 +43,18 @@ export default {
   computed: {
   	...mapGetters([
   		'loggedin',
+      'isAdmin',
   		'user'
   	])
   },
   methods: {
   	...mapActions([
-  		'logout'
+  		'logout',
+      'setFeedback'
   	]),
   	logoutUser () {
-  		this.logout().then(() =>
-  		{
-  			this.$router.push({path: '/login'});
+  		this.logout().then(() => {
+  			this.$router.push({path: '/login', query: {loggedout: true}});
   		});
   	}
   }

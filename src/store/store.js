@@ -8,8 +8,8 @@ Vue.use(Vuex);
 const state = {
 	appLoading: true,
 	feedback: {
-		error : '',
-		success: ''
+		message: false,
+		type: false
 	},
 	auth: {
 		loggedin: false,
@@ -26,11 +26,18 @@ const getters = {
 	feedback () {
 		return state.feedback;
 	},
+	feedbackClass () {
+		const type = state.feedback.type;
+		return `alert alert-${type}`;
+	},
 	auth () {
 		return state.auth;
 	},
 	user () {
-		return state.user;
+		return state.auth.user;
+	},
+	isAdmin () {
+		return (typeof state.auth.user.isAdmin === undefined && state.auth.user.isAdmin);
 	},
 	loggedin () {
 		return state.auth.loggedin;
@@ -50,17 +57,11 @@ const getters = {
 };
 
 const actions = {
-	setError ({ commit }, message) {
-		commit('setError', message);
+	setFeedback({ commit }, data) {
+		commit('setFeedback', data);
 	},
-	clearError({ commit }) {
-		commit('clearError');
-	},
-	setSuccess({ commit }, message) {
-		commit('setSuccess', message);
-	},
-	clearSuccess({ commit }, message) {
-		commit('clearSuccess');
+	clearFeedback({ commit }) {
+		commit('clearFeedback');
 	},
 	login({ commit }, credentials) {
 		return Auth.login(credentials).then((data) => {
@@ -70,7 +71,7 @@ const actions = {
 			commit('setRefreshToken', data.token.refresh);
 		});
 	},
-	authenticate({ state, commit }) {
+	authenticate({ commit }) {
 		return Auth.authenticate().then((data) => {
 			commit('setLoggedIn', true);
 			commit('setUser', data.user);
@@ -91,17 +92,13 @@ const actions = {
 };
 
 const mutations = {
-	setError (state, message) {
-		state.feedback.error = message;
+	setFeedback (state, data) {
+		state.feedback.message = data.message;
+		state.feedback.type = data.type;
 	},
-	clearError (state) {
-		state.feedback.error = '';
-	},
-	setSuccess (state, message) {
-		state.feedback.success = message;
-	},
-	clearSuccess (state) {
-		state.feedback.success = '';
+	clearFeedback (state) {
+		state.feedback.message = false,
+		state.feedback.type = false;
 	},
 	setUser (state, user) {
 		state.auth.user = user;
