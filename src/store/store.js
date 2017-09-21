@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 
 import Auth from '../services/Auth';
+import Posts from '../services/Posts';
 
 Vue.use(Vuex);
 
@@ -20,6 +21,7 @@ const state = {
 		}
 	},
 	loading: false,
+	posts: []
 };
 
 const getters = {
@@ -53,6 +55,9 @@ const getters = {
 	},
 	isAppLoading () {
 		return state.appLoading;
+	},
+	posts () {
+		return state.posts
 	}
 };
 
@@ -88,6 +93,19 @@ const actions = {
 	},
 	setAppLoading({ commit }, status) {
 		commit('setAppLoading', status);
+	},
+	getPosts({ commit }) {
+		return Posts.getPosts().then(data => commit('setPosts', data.posts));
+	},
+	addPost({ commit }, post) {
+		return Posts.addPost(post).then(data => {
+			commit('addPost', data.post);
+		});
+	},
+	removePost({ commit }, id) {
+		return Posts.removePost(id).then(data => {
+			commit('removePost', id);
+		});
 	}
 };
 
@@ -130,6 +148,16 @@ const mutations = {
 	},
 	setAppLoading (state, status) {
 		state.appLoading = status;
+	},
+	setPosts (state, posts) {
+		state.posts = posts;
+	},
+	addPost (state, post) {
+		state.posts.push(post);
+	},
+	removePost (state, id) {
+		let i = state.posts.map(item => item._id).indexOf(id);
+		state.posts.splice(i, 1);
 	}
 };
 
