@@ -7,7 +7,7 @@ import router from './router';
 import store from './store/store';
 
 import axios from 'axios';
-import { onSuccess, onError, beforeRequestSuccess, beforeRequestError } from './interceptors/jwt';
+import { onSuccess, onError, beforeRequestSuccess, beforeRequestError } from './interceptors/Jwt';
 
 axios.interceptors.request.use(beforeRequestSuccess, beforeRequestError);
 axios.interceptors.response.use(onSuccess, onError);
