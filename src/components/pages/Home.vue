@@ -1,6 +1,7 @@
 <template>
   <div class="home">
     <h1 class="display-4">Home</h1>
+    <h2>Test Autobuild Deployment</h2>
     {{ auth }}
   </div>
 </template>
