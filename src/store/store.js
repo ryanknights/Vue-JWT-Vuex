@@ -39,7 +39,7 @@ const getters = {
 		return state.auth.user;
 	},
 	isAdmin () {
-		return (typeof state.auth.user.isAdmin === undefined && state.auth.user.isAdmin);
+		return (typeof state.auth.user.isAdmin !== undefined && state.auth.user.isAdmin);
 	},
 	loggedin () {
 		return state.auth.loggedin;

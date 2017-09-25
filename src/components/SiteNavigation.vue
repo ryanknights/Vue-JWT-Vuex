@@ -14,7 +14,7 @@
             <router-link to="/admin" class="nav-link">Admin</router-link>
           </li>   
         </ul>
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0"v-if="!loggedin">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0" v-if="!loggedin">
           <li class="nav-item active">
             <router-link to="/login" class="nav-link">Login</router-link>
           </li>
