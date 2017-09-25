@@ -1,6 +1,8 @@
 <template>
   <div class="loading" v-if="isLoading">
-  	Loading
+  	<div class="container">
+  		Loading...
+  	</div>
   </div>
 </template>
 
@@ -19,5 +21,11 @@ export default {
 </script>
 
 <style scoped>
-
+	div.loading
+	{
+		position : fixed;
+		bottom : 20px;
+		left : 0;
+		right : 0;
+	}
 </style>

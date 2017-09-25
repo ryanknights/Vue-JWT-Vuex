@@ -2,7 +2,12 @@ import axios from 'axios';
 import store from '../store/store';
 import Auth from '../services/Auth';
 
-const onSuccess = (response) => response;
+const onSuccess = (response) => 
+{
+  store.dispatch('setLoading', false);
+
+  return response;
+}
 
 const onError = (error) => {
 
@@ -25,10 +30,13 @@ const onError = (error) => {
     break;
   }
 
+  store.dispatch('setLoading', false);
+
   return Promise.reject(error); 
 }
 
 const beforeRequestSuccess = (config) => {
+  store.dispatch('setLoading', true);
   config.headers.Authorization = `Bearer ${store.getters.accesstoken}`;
   return config;
 }
