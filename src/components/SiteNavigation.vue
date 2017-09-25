@@ -1,32 +1,35 @@
 <template>
-  <nav class="site-navigation">
-    <div class="container clearfix">
-		<ul class="nav nav-bar float-left" v-if="loggedin">
-		  <li class="nav-item">
-		    <router-link to="/" class="nav-link">Home</router-link>
-		  </li>
-		  <li class="nav-item">
-		    <router-link to="/posts" class="nav-link">Posts</router-link>
-		  </li>
-      <li class="nav-item" v-if="isAdmin">
-        <router-link to="/admin" class="nav-link">Admin</router-link>
-      </li>      
-		</ul> 
-		<ul class="nav nav-bar float-left" v-if="!loggedin">
-		  <li class="nav-item">
-		    <router-link to="/login" class="nav-link">Login</router-link>
-		  </li>
-		  <li class="nav-item">
-		    <router-link to="/register" class="nav-link">Register</router-link>
-		  </li>
-		</ul>
-		<ul class="nav nav-bar float-right" v-if="loggedin">
-		  <li class="nav-item">
-		  	<a @click="logoutUser">Logout</a>
-		  </li>
-		</ul>					   	
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+    <a class="navbar-brand" href="#">Vue JWT</a>
+      <div class="navbar-collapse" id="navbar">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0" v-if="loggedin">
+          <li class="nav-item active">
+            <router-link to="/" class="nav-link">Home</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/posts" class="nav-link">Posts</router-link>
+          </li>
+          <li class="nav-item" v-if="isAdmin">
+            <router-link to="/admin" class="nav-link">Admin</router-link>
+          </li>   
+        </ul>
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0"v-if="!loggedin">
+          <li class="nav-item active">
+            <router-link to="/login" class="nav-link">Login</router-link>
+          </li>
+          <li class="nav-item">
+            <router-link to="/register" class="nav-link">Register</router-link>
+          </li>   
+        </ul>   
+        <ul class="navbar-nav" v-if="loggedin">
+          <li class="nav-item">
+            <a @click="logoutUser">Logout</a>
+          </li>
+        </ul>          
+      </div>      
     </div>
-  </nav>
+  </nav>  
 </template>
 
 <script>

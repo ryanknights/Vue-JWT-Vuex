@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <site-navigation></site-navigation>
-    <div class="container">
+    <div class="container pt-3 pb-3">
       <loading></loading>
       <feedback></feedback>
       <router-view></router-view>
