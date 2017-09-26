@@ -40,10 +40,10 @@ export default {
     }
   },
   methods: {
-  	...mapActions([
-  		'setFeedback',
-  		'login'
-  	]),
+  	...mapActions({
+  		setFeedback: 'feedback/setFeedback',
+  		login: 'login'
+  	}),
   	register (user) {
   		Auth.register(user)
   			.then((data) => this.login({username: user.username, password: user.password}))

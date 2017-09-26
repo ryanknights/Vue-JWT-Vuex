@@ -5,14 +5,13 @@ import Auth from '../services/Auth';
 import Posts from '../services/Posts';
 import Users from '../services/Users';
 
+/*----------  Modules  ----------*/
+import feedback from './modules/feedback';
+
 Vue.use(Vuex);
 
 const state = {
 	appLoading: true,
-	feedback: {
-		message: false,
-		type: false
-	},
 	auth: {
 		loggedin: false,
 		user: false,
@@ -27,13 +26,6 @@ const state = {
 };
 
 const getters = {
-	feedback () {
-		return state.feedback;
-	},
-	feedbackClass () {
-		const type = state.feedback.type;
-		return `alert alert-${type}`;
-	},
 	auth () {
 		return state.auth;
 	},
@@ -67,12 +59,6 @@ const getters = {
 };
 
 const actions = {
-	setFeedback({ commit }, data) {
-		commit('setFeedback', data);
-	},
-	clearFeedback({ commit }) {
-		commit('clearFeedback');
-	},
 	login({ commit }, credentials) {
 		return Auth.login(credentials).then((data) => {
 			commit('setLoggedIn', true);
@@ -115,7 +101,7 @@ const actions = {
 	getUsers({ commit }) {
 		return Users.getUsers().then(data => commit('setUsers', data.users));
 	},
-	removePost({ commit }, id) {
+	removeUser({ commit }, id) {
 		return Users.removeUser(id).then(data => {
 			commit('removeUser', id);
 		});
@@ -123,14 +109,6 @@ const actions = {
 };
 
 const mutations = {
-	setFeedback (state, data) {
-		state.feedback.message = data.message;
-		state.feedback.type = data.type;
-	},
-	clearFeedback (state) {
-		state.feedback.message = false,
-		state.feedback.type = false;
-	},
 	setUser (state, user) {
 		state.auth.user = user;
 	},
@@ -185,5 +163,8 @@ export default new Vuex.Store({
 	state,
 	actions,
 	mutations,
-	getters
+	getters,
+	modules: {
+		feedback
+	}
 });

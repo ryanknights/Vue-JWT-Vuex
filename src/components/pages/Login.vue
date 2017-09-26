@@ -35,10 +35,10 @@ export default {
     }
   },
 	methods: {
-  	...mapActions([
-  		'setFeedback',
-  		'login'
-  	]),
+  	...mapActions({
+  		setFeedback: 'feedback/setFeedback',
+  		login: 'login'
+  	}),
   	loginUser (user) {
   		this.login(user)
 			 .then(() => this.$router.push({path: '/'}))

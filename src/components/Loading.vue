@@ -13,9 +13,9 @@ import { mapGetters } from 'vuex';
 export default {
   name: 'loading',
   computed: {
-    ...mapGetters([
-    	'isLoading'
-    ])
+    ...mapGetters({
+    	isLoading: 'isLoading'
+    })
   }
 }
 </script>

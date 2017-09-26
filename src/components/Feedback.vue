@@ -16,15 +16,15 @@ import { mapGetters, mapActions } from 'vuex';
 export default {
   name: 'feedback',
   computed: {
-    ...mapGetters([
-    	'feedback',
-      'feedbackClass'
-    ])
+    ...mapGetters({
+    	feedback: 'feedback/feedback',
+      feedbackClass: 'feedback/feedbackClass',
+    })
   },
   methods: {
-  	...mapActions([
-  		'clearFeedback'
-  	])
+  	...mapActions({
+  		clearFeedback: 'feedback/clearFeedback'
+  	})
   },
   watch: {
     $route () {

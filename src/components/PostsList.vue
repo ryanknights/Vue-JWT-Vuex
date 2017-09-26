@@ -34,11 +34,10 @@ import Posts from '../services/Posts';
 export default {
   name: 'posts-list',
   methods: {
-    ...mapActions([
-      'getPosts',
-      'removePost',
-      'setFeedback'
-    ]),
+    ...mapActions({
+      removePost: 'removePost',
+      setFeedback: 'feedback/setFeedback'
+    }),
     remove(id) {
       this.removePost(id)
         .then(() => this.setFeedback({message: 'Post removed', type: 'success'}))
@@ -46,9 +45,9 @@ export default {
     }
   },
   computed: {
-    ...mapGetters([
-      'posts'
-    ])
+    ...mapGetters({
+      posts: 'posts'
+    })
   }
 }
 </script>

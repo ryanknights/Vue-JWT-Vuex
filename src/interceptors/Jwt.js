@@ -42,6 +42,7 @@ const beforeRequestSuccess = (config) => {
 }
 
 const beforeRequestError = (error) => {
+  store.dispatch('setLoading', false);
   return Promise.reject(error);
 }
 

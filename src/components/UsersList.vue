@@ -18,8 +18,9 @@
           <td>{{ user._id }}</td>
           <td>{{ user.username }}</td>
           <td>{{ user.email }}</td>
+          <td>{{ user.isAdmin }}</td>
           <td>
-            <a href="#" @click.prevent="remove(post._id)" class="btn btn-danger">Delete</a>
+            <a href="#" @click.prevent="remove(user._id)" class="btn btn-danger">Delete</a>
           </td>
         </tr>
       </tbody>
@@ -35,18 +36,20 @@ import Posts from '../services/Users';
 export default {
   name: 'users-list',
   methods: {
-    ...mapActions([
-      'getUsers',
-      'setFeedback'
-    ]),
+    ...mapActions({
+      setFeedback: 'feedback/setFeedback',
+      removeUser: 'removeUser'
+    }),
     remove(id) {
-
+      this.removeUser(id)
+        .then(() => this.setFeedback({message: 'User removed', type: 'success'}))
+        .catch((error) => this.setFeedback({message: error.data, type: 'warning'}));
     }
   },
   computed: {
-    ...mapGetters([
-      'users'
-    ])
+    ...mapGetters({
+      users: 'users'
+    })
   }
 }
 </script>

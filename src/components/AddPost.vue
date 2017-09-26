@@ -35,16 +35,16 @@ export default {
     }
   },  
   computed: {
-    ...mapGetters([
-    	'isLoading',
-    ])
+    ...mapGetters({
+    	isLoading: 'isLoading',
+    })
   },
   methods: {
-    ...mapActions([
-      'getPosts',
-      'setFeedback',
-      'addPost'
-    ]),
+    ...mapActions({
+      getPosts: 'getPosts',
+      setFeedback: 'feedback/setFeedback',
+      addPost: 'addPost'
+    }),
     add(post) {
       this.addPost(post)
         .then(() => this.post = {title: '', content: ''})

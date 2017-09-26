@@ -24,7 +24,7 @@ export default {
     } else {
       store.dispatch('getPosts')
         .then(next)
-        .catch(error => store.dispatch.setFeedback({message: error.data, type: 'warning'}));
+        .catch(error => store.dispatch('feedback/setFeedback', {message: error.data, type: 'warning'}));
     }
   },   
 }

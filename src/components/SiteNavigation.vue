@@ -44,17 +44,16 @@ export default {
     }
   },
   computed: {
-  	...mapGetters([
-  		'loggedin',
-      'isAdmin',
-  		'user'
-  	])
+  	...mapGetters({
+  		loggedin: 'loggedin',
+      isAdmin: 'isAdmin',
+  		user: 'user'
+  	})
   },
   methods: {
-  	...mapActions([
-  		'logout',
-      'setFeedback'
-  	]),
+  	...mapActions({
+  		logout: 'logout'
+  	}),
   	logoutUser () {
   		this.logout().then(() => {
   			this.$router.push({path: '/login', query: {loggedout: true}});
