@@ -22,7 +22,6 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex';
-import Posts from '../services/Posts';
 
 export default {
   name: 'add-post',
@@ -36,14 +35,14 @@ export default {
   },  
   computed: {
     ...mapGetters({
-    	isLoading: 'isLoading',
+    	isLoading: 'loading/isLoading',
     })
   },
   methods: {
     ...mapActions({
-      getPosts: 'getPosts',
+      getPosts: 'posts/getPosts',
       setFeedback: 'feedback/setFeedback',
-      addPost: 'addPost'
+      addPost: 'posts/addPost'
     }),
     add(post) {
       this.addPost(post)

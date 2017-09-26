@@ -1,8 +1,8 @@
 import store from '../../store/store';
 
 export default (to, from, next) => {
-	if (!store.getters.loggedin) {
-		store.dispatch('logout');
+	if (!store.getters['auth/loggedin']) {
+		store.dispatch('auth/logout');
 		return next('/login');		
 	}
 
@@ -10,7 +10,7 @@ export default (to, from, next) => {
 		return next();
 	}
 
-	if (!store.getters.isAdmin) {
+	if (!store.getters['auth/isAdmin']) {
 		return next('/');
 	}
 

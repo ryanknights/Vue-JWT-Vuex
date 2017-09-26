@@ -37,7 +37,7 @@ export default {
 	methods: {
   	...mapActions({
   		setFeedback: 'feedback/setFeedback',
-  		login: 'login'
+  		login: 'auth/login'
   	}),
   	loginUser (user) {
   		this.login(user)

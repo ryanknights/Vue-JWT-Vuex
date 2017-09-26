@@ -45,14 +45,14 @@ export default {
   },
   computed: {
   	...mapGetters({
-  		loggedin: 'loggedin',
-      isAdmin: 'isAdmin',
-  		user: 'user'
+  		loggedin: 'auth/loggedin',
+      isAdmin: 'auth/isAdmin',
+  		currentUser: 'auth/user'
   	})
   },
   methods: {
   	...mapActions({
-  		logout: 'logout'
+  		logout: 'auth/logout'
   	}),
   	logoutUser () {
   		this.logout().then(() => {

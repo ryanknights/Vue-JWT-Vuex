@@ -4,7 +4,7 @@ import Auth from '../services/Auth';
 
 const onSuccess = (response) => 
 {
-  store.dispatch('setLoading', false);
+  store.dispatch('loading/setLoading', false);
 
   return response;
 }
@@ -16,12 +16,12 @@ const onError = (error) => {
       const originalRequest = error.config;
       if (!originalRequest._retry && error.response.data === 'Token Expired') {
         originalRequest._retry = true;
-        const refreshToken = store.getters.refreshtoken;
+        const refreshToken = store.getters['auth/refreshtoken'];
         return Auth.refresh(refreshToken).then((response) => {
-            store.commit('setAccessToken', response.token.access);
+            store.commit('auth/setAccessToken', response.token.access);
             return axios(originalRequest);
           }).catch((error) => {
-            store.dispatch('logout');
+            store.dispatch('auth/logout');
             return Promise.reject(error);
           });
       } 
@@ -30,19 +30,19 @@ const onError = (error) => {
     break;
   }
 
-  store.dispatch('setLoading', false);
+  store.dispatch('loading/setLoading', false);
 
   return Promise.reject(error); 
 }
 
 const beforeRequestSuccess = (config) => {
-  store.dispatch('setLoading', true);
-  config.headers.Authorization = `Bearer ${store.getters.accesstoken}`;
+  store.dispatch('loading/setLoading', true);
+  config.headers.Authorization = `Bearer ${store.getters['auth/accesstoken']}`;
   return config;
 }
 
 const beforeRequestError = (error) => {
-  store.dispatch('setLoading', false);
+  store.dispatch('loading/setLoading', false);
   return Promise.reject(error);
 }
 

@@ -29,13 +29,12 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex';
-import Posts from '../services/Posts';
 
 export default {
   name: 'posts-list',
   methods: {
     ...mapActions({
-      removePost: 'removePost',
+      removePost: 'posts/removePost',
       setFeedback: 'feedback/setFeedback'
     }),
     remove(id) {
@@ -46,7 +45,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      posts: 'posts'
+      posts: 'posts/posts'
     })
   }
 }

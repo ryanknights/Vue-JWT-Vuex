@@ -19,10 +19,10 @@ export default {
   	AddPost
   },
   beforeRouteEnter (to, from, next) {
-    if (store.state.posts.length) {
+    if (store.state.posts.posts.length) {
       next();
     } else {
-      store.dispatch('getPosts')
+      store.dispatch('posts/getPosts')
         .then(next)
         .catch(error => store.dispatch('feedback/setFeedback', {message: error.data, type: 'warning'}));
     }

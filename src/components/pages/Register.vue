@@ -42,7 +42,7 @@ export default {
   methods: {
   	...mapActions({
   		setFeedback: 'feedback/setFeedback',
-  		login: 'login'
+  		login: 'auth/login'
   	}),
   	register (user) {
   		Auth.register(user)

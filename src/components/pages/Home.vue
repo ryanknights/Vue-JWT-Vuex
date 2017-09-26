@@ -17,9 +17,9 @@ export default {
     }
   },
   computed : {
-    ...mapGetters([
-      'auth'
-    ])
+    ...mapGetters({
+      auth: 'auth/auth'
+    })
   }
 }
 </script>

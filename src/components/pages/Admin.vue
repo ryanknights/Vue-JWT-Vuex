@@ -16,9 +16,9 @@ export default {
     UsersList,
   },
   beforeRouteEnter (to, from, next) {
-      store.dispatch('getUsers')
+      store.dispatch('users/getUsers')
         .then(next)
-        .catch(error => store.dispatch.setFeedback({message: error.data, type: 'warning'}));
+        .catch(error => store.dispatch('feedback/setFeedback', {message: error.data, type: 'warning'}));
   },   
 }
 </script>

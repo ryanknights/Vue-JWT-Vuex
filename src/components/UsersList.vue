@@ -31,14 +31,13 @@
 <script>
 
 import { mapGetters, mapActions } from 'vuex';
-import Posts from '../services/Users';
 
 export default {
   name: 'users-list',
   methods: {
     ...mapActions({
       setFeedback: 'feedback/setFeedback',
-      removeUser: 'removeUser'
+      removeUser: 'users/removeUser'
     }),
     remove(id) {
       this.removeUser(id)
@@ -48,7 +47,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      users: 'users'
+      users: 'users/users'
     })
   }
 }

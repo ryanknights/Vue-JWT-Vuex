@@ -14,7 +14,7 @@ export default {
   name: 'loading',
   computed: {
     ...mapGetters({
-    	isLoading: 'isLoading'
+    	isLoading: 'loading/isLoading'
     })
   }
 }
