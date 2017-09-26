@@ -19,6 +19,11 @@ const actions = {
 	setFeedback({ commit }, data) {
 		commit('setFeedback', data);
 	},
+	setDelayedFeedback({ commit }, data) {
+		setTimeout(() => {
+			commit('setFeedback', data.feedback);
+		}, data.delay || 10);
+	},
 	clearFeedback({ commit }) {
 		commit('clearFeedback');
 	}

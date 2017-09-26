@@ -37,19 +37,14 @@ export default {
 	methods: {
   	...mapActions({
   		setFeedback: 'feedback/setFeedback',
+      setDelayedFeedback: 'feedback/setDelayedFeedback',
   		login: 'auth/login'
   	}),
   	loginUser (user) {
   		this.login(user)
+       .then(() => this.setDelayedFeedback({feedback: { message: 'Logged In', type: 'success'}}))
 			 .then(() => this.$router.push({path: '/'}))
 			 .catch((error) => this.setFeedback({message: error.data, type: 'warning'}));
-    }
-  },
-  mounted () {
-    if (typeof this.$route.query.loggedout !== 'undefined') {
-      this.$nextTick(() => {
-        this.setFeedback({message: 'Successfully logged out', type: 'info'});
-      });
     }
   }
 }

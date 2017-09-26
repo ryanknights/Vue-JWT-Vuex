@@ -24,7 +24,7 @@
         </ul>   
         <ul class="navbar-nav" v-if="loggedin">
           <li class="nav-item">
-            <a @click="logoutUser">Logout</a>
+            Logged in as <strong>{{ currentUser.username }}</strong> <em>(<a @click="logoutUser">Logout</a>)</em>
           </li>
         </ul>          
       </div>      
@@ -52,11 +52,13 @@ export default {
   },
   methods: {
   	...mapActions({
-  		logout: 'auth/logout'
+  		logout: 'auth/logout',
+      setDelayedFeedback: 'feedback/setDelayedFeedback'      
   	}),
   	logoutUser () {
   		this.logout().then(() => {
-  			this.$router.push({path: '/login', query: {loggedout: true}});
+        this.setDelayedFeedback({feedback: { message: 'Successfully logged out', type: 'info'}});
+  			return this.$router.push({path: '/login'});
   		});
   	}
   }
