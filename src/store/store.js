@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 
 import Auth from '../services/Auth';
 import Posts from '../services/Posts';
+import Users from '../services/Users';
 
 Vue.use(Vuex);
 
@@ -21,7 +22,8 @@ const state = {
 		}
 	},
 	loading: false,
-	posts: []
+	posts: [],
+	users: []
 };
 
 const getters = {
@@ -58,6 +60,9 @@ const getters = {
 	},
 	posts () {
 		return state.posts
+	},
+	users () {
+		return state.users
 	}
 };
 
@@ -106,7 +111,15 @@ const actions = {
 		return Posts.removePost(id).then(data => {
 			commit('removePost', id);
 		});
-	}
+	},
+	getUsers({ commit }) {
+		return Users.getUsers().then(data => commit('setUsers', data.users));
+	},
+	removePost({ commit }, id) {
+		return Users.removeUser(id).then(data => {
+			commit('removeUser', id);
+		});
+	}	
 };
 
 const mutations = {
@@ -158,7 +171,14 @@ const mutations = {
 	removePost (state, id) {
 		let i = state.posts.map(item => item._id).indexOf(id);
 		state.posts.splice(i, 1);
-	}
+	},
+	setUsers (state, users) {
+		state.users = users;
+	},
+	removeUser (state, id) {
+		let i = state.users.map(item => item._id).indexOf(id);
+		state.users.splice(i, 1);
+	}	
 };
 
 export default new Vuex.Store({

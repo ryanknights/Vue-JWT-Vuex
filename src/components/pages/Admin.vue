@@ -1,25 +1,25 @@
 <template>
-  <div class="home">
+  <div class="admin">
     <h1 class="display-4">Admin</h1>
+    <users-list></users-list>
   </div>
 </template>
 
 <script>
 
-import { mapGetters } from 'vuex';
+import UsersList from '../UsersList';
+import store from '../../store/store';
 
 export default {
   name: 'admin',
-  data () {
-    return {
-
-    }
+  components: { 
+    UsersList,
   },
-  computed : {
-    ...mapGetters([
-
-    ])
-  }
+  beforeRouteEnter (to, from, next) {
+      store.dispatch('getUsers')
+        .then(next)
+        .catch(error => store.dispatch.setFeedback({message: error.data, type: 'warning'}));
+  },   
 }
 </script>
 
