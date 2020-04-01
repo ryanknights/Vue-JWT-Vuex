@@ -1,8 +1,8 @@
 <template>
   <div class="loading" v-if="isLoading">
-  	<div class="container">
-  		Loading...
-  	</div>
+    <div class="container">
+      Loading...
+    </div>
   </div>
 </template>
 
@@ -14,18 +14,17 @@ export default {
   name: 'loading',
   computed: {
     ...mapGetters({
-    	isLoading: 'loading/isLoading'
-    })
-  }
-}
+      isLoading: 'loading/isLoading',
+    }),
+  },
+};
 </script>
 
 <style scoped>
-	div.loading
-	{
-		position : fixed;
-		bottom : 20px;
-		left : 0;
-		right : 0;
-	}
+  div.loading {
+    position : fixed;
+    bottom : 20px;
+    left : 0;
+    right : 0;
+  }
 </style>

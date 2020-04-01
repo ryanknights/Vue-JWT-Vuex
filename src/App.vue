@@ -5,32 +5,24 @@
       <loading></loading>
       <feedback></feedback>
       <router-view></router-view>
-    </div>    
+    </div>
   </div>
 </template>
 
 <script>
 
-import SiteNavigation from './components/SiteNavigation';
-import Auth from './services/Auth';
-import Feedback from './components/Feedback';
-import Loading from './components/Loading';
-import store from './store/store';
-import { mapActions } from 'vuex';
+import SiteNavigation from './components/SiteNavigation.vue';
+import Feedback from './components/Feedback.vue';
+import Loading from './components/Loading.vue';
 
 export default {
   name: 'app',
   components: {
     SiteNavigation,
     Feedback,
-    Loading
+    Loading,
   },
-  methods: {
-    ...mapActions([
-
-    ])
-  }
-}
+};
 </script>
 
 <style>

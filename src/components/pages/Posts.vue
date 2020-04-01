@@ -8,26 +8,26 @@
 
 <script>
 
-import PostsList from '../PostsList';
-import AddPost from '../AddPost';
+import PostsList from '../PostsList.vue';
+import AddPost from '../AddPost.vue';
 import store from '../../store/store';
 
 export default {
   name: 'posts',
-  components: { 
-  	PostsList,
-  	AddPost
+  components: {
+    PostsList,
+    AddPost,
   },
-  beforeRouteEnter (to, from, next) {
+  beforeRouteEnter(to, from, next) {
     if (store.state.posts.posts.length) {
       next();
     } else {
       store.dispatch('posts/getPosts')
         .then(next)
-        .catch(error => store.dispatch('feedback/setFeedback', {message: error.data, type: 'warning'}));
+        .catch((error) => store.dispatch('feedback/setFeedback', { message: error.data, type: 'warning' }));
     }
-  },   
-}
+  },
+};
 </script>
 
 <style scoped>
