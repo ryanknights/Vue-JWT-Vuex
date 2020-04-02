@@ -14,6 +14,7 @@ import {
   beforeRequestError,
 } from './interceptors/Jwt';
 
+axios.defaults.baseURL = 'http://localhost:4007/api/';
 axios.interceptors.request.use(beforeRequestSuccess, beforeRequestError);
 axios.interceptors.response.use(onSuccess, onError);
 
