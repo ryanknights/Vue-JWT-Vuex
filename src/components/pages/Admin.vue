@@ -7,20 +7,20 @@
 
 <script>
 
-import UsersList from '../UsersList';
+import UsersList from '../UsersList.vue';
 import store from '../../store/store';
 
 export default {
   name: 'admin',
-  components: { 
+  components: {
     UsersList,
   },
-  beforeRouteEnter (to, from, next) {
-      store.dispatch('users/getUsers')
-        .then(next)
-        .catch(error => store.dispatch('feedback/setFeedback', {message: error.data, type: 'warning'}));
-  },   
-}
+  beforeRouteEnter(to, from, next) {
+    store.dispatch('users/getUsers')
+      .then(next)
+      .catch((error) => store.dispatch('feedback/setFeedback', { message: error.data, type: 'warning' }));
+  },
+};
 </script>
 
 <style scoped>
