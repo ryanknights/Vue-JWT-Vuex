@@ -11,17 +11,12 @@ import { mapGetters } from 'vuex';
 
 export default {
   name: 'home',
-  data () {
-    return {
-
-    }
-  },
-  computed : {
+  computed: {
     ...mapGetters({
-      auth: 'auth/auth'
-    })
-  }
-}
+      auth: 'auth/auth',
+    }),
+  },
+};
 </script>
 
 <style scoped>

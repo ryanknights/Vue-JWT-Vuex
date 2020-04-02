@@ -1,8 +1,8 @@
 <template>
   <div class="posts-list">
-  	<div class="alert alert-warning" v-if="!posts.length">
-  		No Posts To Display
-  	</div>
+    <div class="alert alert-warning" v-if="!posts.length">
+      No Posts To Display
+    </div>
     <table class="table table-striped" v-if="posts.length">
       <thead>
         <tr>
@@ -13,7 +13,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(post, index) in posts">
+        <tr v-for="(post, index) in posts" :key="index">
           <td>{{ post._id }}</td>
           <td>{{ post.title }}</td>
           <td>{{ post.content }}</td>
@@ -35,20 +35,20 @@ export default {
   methods: {
     ...mapActions({
       removePost: 'posts/removePost',
-      setFeedback: 'feedback/setFeedback'
+      setFeedback: 'feedback/setFeedback',
     }),
     remove(id) {
       this.removePost(id)
-        .then(() => this.setFeedback({message: 'Post removed', type: 'success'}))
-        .catch((error) => this.setFeedback({message: error.data, type: 'warning'}));
-    }
+        .then(() => this.setFeedback({ message: 'Post removed', type: 'success' }))
+        .catch((error) => this.setFeedback({ message: error.data, type: 'warning' }));
+    },
   },
   computed: {
     ...mapGetters({
-      posts: 'posts/posts'
-    })
-  }
-}
+      posts: 'posts/posts',
+    }),
+  },
+};
 </script>
 
 <style scoped>

@@ -12,7 +12,7 @@
           </li>
           <li class="nav-item" v-if="isAdmin">
             <router-link to="/admin" class="nav-link">Admin</router-link>
-          </li>   
+          </li>
         </ul>
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0" v-if="!loggedin">
           <li class="nav-item active">
@@ -20,16 +20,18 @@
           </li>
           <li class="nav-item">
             <router-link to="/register" class="nav-link">Register</router-link>
-          </li>   
-        </ul>   
+          </li>
+        </ul>
         <ul class="navbar-nav" v-if="loggedin">
           <li class="nav-item">
-            Logged in as <strong>{{ currentUser.username }}</strong> <em>(<a @click="logoutUser">Logout</a>)</em>
+            Logged in as
+            <strong>{{ currentUser.username }}</strong>
+            <em> (<a @click="logoutUser">Logout</a>)</em>
           </li>
-        </ul>          
-      </div>      
+        </ul>
+      </div>
     </div>
-  </nav>  
+  </nav>
 </template>
 
 <script>
@@ -38,31 +40,27 @@ import { mapGetters, mapActions } from 'vuex';
 
 export default {
   name: 'site-navigation',
-  data () {
-    return {
-
-    }
-  },
   computed: {
-  	...mapGetters({
-  		loggedin: 'auth/loggedin',
+    ...mapGetters({
+      loggedin: 'auth/loggedin',
       isAdmin: 'auth/isAdmin',
-  		currentUser: 'auth/user'
-  	})
+      currentUser: 'auth/user',
+    }),
   },
   methods: {
-  	...mapActions({
-  		logout: 'auth/logout',
-      setDelayedFeedback: 'feedback/setDelayedFeedback'      
-  	}),
-  	logoutUser () {
-  		this.logout().then(() => {
-        this.setDelayedFeedback({feedback: { message: 'Successfully logged out', type: 'info'}});
-  			return this.$router.push({path: '/login'});
-  		});
-  	}
-  }
-}
+    ...mapActions({
+      logout: 'auth/logout',
+      setDelayedFeedback: 'feedback/setDelayedFeedback',
+    }),
+    logoutUser() {
+      this.logout()
+        .then(() => {
+          this.setDelayedFeedback({ feedback: { message: 'Successfully logged out', type: 'info' } });
+          return this.$router.push({ path: '/login' });
+        });
+    },
+  },
+};
 </script>
 
 <style scoped>
